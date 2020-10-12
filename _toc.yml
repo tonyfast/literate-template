@@ -1,0 +1,4 @@
+- file: readme.md
+- part: {{cookiecutter.name}}
+  chapters:
+  - file: {{cookiecutter.name}}/readme.md

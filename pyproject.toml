@@ -1,0 +1,20 @@
+# https://flit.readthedocs.io
+
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "{{cookiecutter.name}}"
+author = "{{cookiecutter.author}}"
+author-email = "tony.fast@gmail.com"
+home-page = "http://github.com/{{cookiecutter.author}}/{{cookiecutter.name}}"
+classifiers = ["License :: OSI Approved :: MIT License"]
+requires=["typer"]
+
+[tool.flit.metadata.requires-extra]
+test = ["pytest", "nbval"]
+doc = ["jupyter-book", "pyppeteer",  "doit"]
+
+[tool.pytest.ini_options]
+addopts = "--nbval --sanitize-with sanitize.cfg -p no:warnings"

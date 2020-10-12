@@ -1,0 +1,8 @@
+
+title: {{cookiecutter.name}}
+author: {{cookiecutter.author}}
+email: {{cookiecutter.email}}
+description: ""
+
+execute:
+  execute_notebooks: "off"
