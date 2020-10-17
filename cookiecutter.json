@@ -1,8 +1,8 @@
 {
     "name": "untitled",
-    "python_module": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+    "py_module": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "author": "deathbeds",
     "email": "@",
-    "js_module": "{{ cookiecutter.python_module.replace('_', '-') }}",
+    "js_module": "{{ cookiecutter.py_module.replace('_', '-') }}",
     "repository": "https://github.com/{{ author }}/{{ js_module }}"
 }
