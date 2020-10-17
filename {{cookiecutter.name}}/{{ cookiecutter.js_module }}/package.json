@@ -1,0 +1,39 @@
+{
+  "name": "{{ cookiecutter.js_module }}",
+  "main": "lib/index.js",
+  "jupyterlab": {
+    "extension": "lib/plugin.js",
+    "outputDir": "../static"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^3.0.0-rc.4"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.3",
+    "prettier": "^2.1.2",
+    "@jupyterlab/builder": "^3.0.0-rc.4",
+    "prettier-plugin-toml": "0.3.1"
+  },
+  "files": [
+    "{lib,style,schema}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "scripts": {
+    "build": "jlpm build:ts && jlpm build:ext",
+    "build:ts": "tsc",
+    "build:ext": "jupyter labextension build .",
+    "watch": "tsc -w",
+    "lint": "jlpm prettier:format",
+    "prettier:format": "prettier --list-different --write \"*.{yml,md,json}\" \"{src/ts,style,schema}/**/*.{ts,tsx,css,json}\""
+  },
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension"
+  ],
+  "license": "BSD-3-Clause",
+  "homepage": "{{ cookiecutter.repository }}",
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
+}

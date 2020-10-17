@@ -1,0 +1,25 @@
+name: {{ cookiecutter.python_module }}
+
+channels:
+  - conda-forge/label/jupyterlab_rc
+  - conda-forge/label/jupyterlab_server_rc
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - black
+  - dodo
+  - flit
+  - ipywidgets
+  - jupyterlab >=3.0.0rc5
+  - jupyterlab_server >=2.0.0rc1
+  - matplotlib-base
+  - nbgitpuller
+  - pandas
+  - pip
+  - python >=3.8,<3.9
+  - toml
+  - twine
+  - wheel
+  - pip:
+    - jupyterlab-widgets >=1.0.0a5
