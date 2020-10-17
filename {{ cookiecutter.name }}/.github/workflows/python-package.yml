@@ -24,9 +24,3 @@ jobs:
         pip install .[test]
         pip install pytest-github-actions-annotate-failures
         pytest
-    - name: Publish package when tagged.
-      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') && matrix.python-version == '3.8'
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        user: username
-        password: ${{ secrets.pypi_password }}
