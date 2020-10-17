@@ -1,5 +1,9 @@
 {
-    "name": "Untitled",
+    "name": "untitled",
+    "short_description": "a {{ cookiecutter.name }} for JupyterLab",
+    "py_module": "{{ cookiecutter.name.lower().replace(' ', '_') }}",
     "author": "deathbeds",
-    "email": "@"
+    "email": "@",
+    "js_module": "{{ cookiecutter.py_module.replace('_', '-') }}",
+    "repository": "https://github.com/{{ cookiecutter.author }}/{{ cookiecutter.js_module }}"
 }

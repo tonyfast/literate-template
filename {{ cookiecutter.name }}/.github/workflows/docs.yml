@@ -17,16 +17,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with: 
+      with:
         submodules: true
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
     - name: setup
       run: |
         sudo apt install pandoc
-        pip install -rrequirements.txt
+        pip install -r requirements.txt
         pip install .[doc]
     - name: Build docs
       run: |
@@ -35,9 +35,3 @@ jobs:
       with:
         name: {{cookiecutter.name}} pdf
         path: _build/pdf/book.pdf
-
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_build/html        

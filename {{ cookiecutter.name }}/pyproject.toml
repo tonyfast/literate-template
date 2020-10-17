@@ -1,15 +1,16 @@
-# https://flit.readthedocs.io
+# {{ cookiecutter.py_module }} project data
 
 [build-system]
-requires = ["flit_core >=2,<4"]
+requires = ["flit_core >=2,<4", "setuptools"]
 build-backend = "flit_core.buildapi"
 
+# https://flit.readthedocs.io
 [tool.flit.metadata]
 module = "{{cookiecutter.name}}"
 author = "{{cookiecutter.author}}"
-author-email = "tony.fast@gmail.com"
+author-email = "{{ cookiecutter.author }}@example.com"
 home-page = "http://github.com/{{cookiecutter.author}}/{{cookiecutter.name}}"
-classifiers = ["License :: OSI Approved :: MIT License"]
+classifiers = ["License :: OSI Approved :: BSD License"]
 requires=["typer"]
 
 [tool.flit.metadata.requires-extra]

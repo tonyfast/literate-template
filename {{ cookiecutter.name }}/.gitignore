@@ -144,5 +144,6 @@ cython_debug/
 # doit cruft
 .doit*
 
-# test stuff
-untitled*
+# node cruft
+node_modules/
+.yarn-packages/

@@ -1,0 +1,31 @@
+name: dev
+
+channels:
+  - conda-forge/label/jupyterlab_rc
+  - conda-forge/label/jupyterlab_server_rc
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - black
+  - cookiecutter
+  - doit
+  - firefox
+  - flit
+  - geckodriver
+  - ipywidgets
+  - jupyterlab >=3.0.0rc5
+  - jupyterlab_server >=2.0.0rc1
+  - matplotlib-base
+  - nbgitpuller
+  - nodejs >=14,<15
+  - pandas
+  - pip
+  - pytest
+  - python >=3.8,<3.9
+  - robotframework-seleniumlibrary
+  - toml
+  - twine
+  - wheel
+  - pip:
+    - jupyterlab-widgets >=1.0.0a5

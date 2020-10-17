@@ -15,18 +15,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
     - name: Test with pytest
       run: |
         pip install .[test]
         pip install pytest-github-actions-annotate-failures
         pytest
-    - name: Publish package when tagged.
-      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') && matrix.python-version == '3.8'
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        user: username
-        password: ${{ secrets.pypi_password }}
