@@ -1,4 +1,4 @@
-name: {{ cookiecutter.py_module }}_demo
+name: dev
 
 channels:
   - conda-forge/label/jupyterlab_rc
@@ -8,7 +8,7 @@ channels:
 
 dependencies:
   - black
-  - dodo
+  - doit
   - firefox
   - flit
   - geckodriver
@@ -17,6 +17,7 @@ dependencies:
   - jupyterlab_server >=2.0.0rc1
   - matplotlib-base
   - nbgitpuller
+  - nodejs >=14,<15
   - pandas
   - pip
   - pytest
