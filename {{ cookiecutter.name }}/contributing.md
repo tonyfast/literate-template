@@ -9,9 +9,28 @@ doit
 ## Prerequisites
 
 ```py
+import os
 from pathlib import Path
-from doit.action import CmdAction
 import toml
+```
+
+
+### doit configuration and environment
+```py
+from doit.tools import config_changed
+from doit.action import CmdAction
+
+DOIT_CONFIG = {
+    "backend": "sqlite3",
+    "verbosity": 2,
+    "par_type": "thread"
+}
+
+os.environ.update(
+    PYTHONUNBUFFERED="1",
+    PYTHONIOENCODING="utf-8",
+    NODE_OPTIONS="--max-old-space-size=4096",
+)
 ```
 
 ## Key Paths

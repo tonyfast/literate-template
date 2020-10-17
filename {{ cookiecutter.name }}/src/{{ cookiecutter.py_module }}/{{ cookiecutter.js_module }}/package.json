@@ -1,5 +1,6 @@
 {
   "name": "{{ cookiecutter.js_module }}",
+  "version": "0.1.0",
   "main": "lib/index.js",
   "jupyterlab": {
     "extension": "lib/plugin.js",

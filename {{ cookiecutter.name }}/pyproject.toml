@@ -7,7 +7,7 @@ build-backend = "flit_core.buildapi"
 [tool.flit.metadata]
 module = "{{cookiecutter.name}}"
 author = "{{cookiecutter.author}}"
-author-email = "{{ author }}@example.com"
+author-email = "{{ cookiecutter.author }}@example.com"
 home-page = "http://github.com/{{cookiecutter.author}}/{{cookiecutter.name}}"
 classifiers = ["License :: OSI Approved :: BSD License"]
 requires=["typer"]
