@@ -46,7 +46,17 @@ def task_test():
             file_dep=[ENV_YML],
             actions=[
                 CmdAction(
-                    ["mamba", "env", "update", "--prefix", os.environ["CONDA_PREFIX"], "--file", ENV_YML], cwd=PROJ, shell=False
+                    [
+                        "mamba",
+                        "env",
+                        "update",
+                        "--prefix",
+                        os.environ["CONDA_PREFIX"],
+                        "--file",
+                        ENV_YML,
+                    ],
+                    cwd=PROJ,
+                    shell=False,
                 ),
                 lambda: ENV_OK.touch(),
             ],
@@ -57,7 +67,15 @@ def task_test():
             file_dep=[PROJ_PROJ],
             actions=[
                 CmdAction(
-                    ["python", "-m", "pip", "install", "-e", ".[dev]"], shell=False
+                    [
+                        sys.executable,
+                        "-m",
+                        "pip",
+                        "install",
+                        "-r",
+                        "requirements-dev.txt",
+                    ],
+                    shell=False,
                 ),
                 lambda: ENV_OK.touch(),
             ],
