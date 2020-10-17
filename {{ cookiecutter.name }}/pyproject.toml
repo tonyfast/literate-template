@@ -7,9 +7,9 @@ build-backend = "flit_core.buildapi"
 [tool.flit.metadata]
 module = "{{cookiecutter.name}}"
 author = "{{cookiecutter.author}}"
-author-email = "tony.fast@gmail.com"
+author-email = "{{ author }}@example.com"
 home-page = "http://github.com/{{cookiecutter.author}}/{{cookiecutter.name}}"
-classifiers = ["License :: OSI Approved :: MIT License"]
+classifiers = ["License :: OSI Approved :: BSD License"]
 requires=["typer"]
 
 [tool.flit.metadata.requires-extra]
