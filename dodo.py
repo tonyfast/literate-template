@@ -2,10 +2,12 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 
-CC = HERE / "{{ cookiecutter.name }}"
+CCJ = HERE / "cookiecutter.json"
+PROJ = HERE / "{{ cookiecutter.name }}"
+PROJ_FILES = [f for f in PROJ.rglob("*") if not f.is_dir()]
 
 def task_test():
     return dict(
-        file_dep=[*CC.rglob("*")],
+        file_dep=PROJ_FILES,
         actions=[["cookiecutter", ".", "-f", "--no-input"]]
     )
