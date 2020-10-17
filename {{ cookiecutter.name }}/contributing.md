@@ -9,15 +9,13 @@ doit
 ## Prerequisites
 
 ```py
-import os
-import subprocess
+import json, os, sys, subprocess, toml
 from pathlib import Path
-import toml
-import json
 ```
 
 
 ### doit configuration and environment
+
 ```py
 from doit.tools import config_changed
 from doit.action import CmdAction
@@ -147,7 +145,7 @@ A number of tasks ensure working with the JS and python packages during developm
 
 ```py
 
-LABEXT = ["jupyter", "labextension"]
+LABEXT = [sys.executable, "-m", "jupyter", "labextension"]
 
 def task_dev():
     yield dict(
@@ -165,10 +163,10 @@ def task_dev():
     yield dict(
         name="py",
         actions=[
-            ["pip", "install", "-e", ".", "--no-deps"],
+            [sys.executable, "-m", "pip", "install", "-e", ".", "--no-deps"],
             _log(["pip", "freeze"], PIP_FROZEN),
         ],
-        file_dep=[SETUP_PY],
+        file_dep=[SETUP_PY, STATIC_PKG_JSON],
         targets=[PIP_FROZEN],
     )
 

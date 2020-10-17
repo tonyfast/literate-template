@@ -1,2 +1,2 @@
-git+https://github.com/deathbeds/tingle
 doit
+toml
