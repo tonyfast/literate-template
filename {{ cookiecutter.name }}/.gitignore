@@ -143,3 +143,7 @@ cython_debug/
 
 # doit cruft
 .doit*
+
+# node cruft
+node_modules/
+.yarn-packages/

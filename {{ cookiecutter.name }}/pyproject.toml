@@ -1,7 +1,7 @@
 # {{ cookiecutter.py_module }} project data
 
 [build-system]
-requires = ["flit_core >=2,<4"]
+requires = ["flit_core >=2,<4", "setuptools"]
 build-backend = "flit_core.buildapi"
 
 # https://flit.readthedocs.io

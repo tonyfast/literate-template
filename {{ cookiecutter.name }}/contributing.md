@@ -10,6 +10,7 @@ doit
 
 ```py
 import os
+import subprocess
 from pathlib import Path
 import toml
 import json
@@ -38,13 +39,18 @@ os.environ.update(
 
 ```py
 HERE = Path(__file__).parent.resolve()
-JS = HERE / "{{ cookiecutter.js_module }}
 BUILD = HERE / "build"
+BUILD.exists() or BUILD.mkdir()
 PYPROJECT_TOML = HERE / "pyproject.toml"
+SETUP_PY = HERE / "setup.py"
 PYPROJECT = toml.loads(PYPROJECT_TOML.read_text())
 FLIT = PYPROJECT["tool"]["flit"]
 METADATA = FLIT["metadata"]
 PY_NAME = METADATA["module"]
+# TODO: decide source of truth
+VERSION = "0.1.0"
+SRC_PY = HERE / "src" / PY_NAME
+JS = SRC_PY / "js"
 ```
 
 ## Goals
@@ -94,11 +100,10 @@ SRC_TS = JS / "src"
 ALL_TS = sorted(SRC_TS.rglob("*.ts"))
 JS_LIB = JS / "lib"
 ALL_JS = [JS_LIB / "index.js", JS_LIB / "plugin.js"]
-```
 
-```py
-def jlpm(args):
-    return CmdAction(["jlpm", *args], cwd=JS)
+STATIC_OUT = SRC_PY / "static"
+# this contains the name of the `remoteEntry.<hash>.js`
+STATIC_PKG_JSON = STATIC_OUT / "package.json"
 
 def task_jlpm():
 ```
@@ -120,7 +125,7 @@ def task_jlpm():
     yield dict(
         name="tsc",
         file_dep=[YARN_INTEGRITY, *ALL_TS],
-        actions=[jlpm("build:ts")],
+        actions=[jlpm(["build:ts"])],
         targets=[*ALL_JS]
     )
 ```
@@ -131,7 +136,8 @@ def task_jlpm():
     yield dict(
         name="ext",
         file_dep=[*ALL_JS],
-        actions=[jlpm("build:ext")]
+        actions=[jlpm(["build:ext"])],
+        targets=[STATIC_PKG_JSON]
     )
 ```
 
@@ -140,6 +146,9 @@ def task_jlpm():
 A number of tasks ensure working with the JS and python packages during development.
 
 ```py
+
+LABEXT = ["jupyter", "labextension"]
+
 def task_dev():
     yield dict(
         name="js",
@@ -156,10 +165,10 @@ def task_dev():
     yield dict(
         name="py",
         actions=[
-            [*PIP, "install", "-e", ".", "--no-deps"],
-            _log([*PIP, "freeze"], PIP_FROZEN),
+            ["pip", "install", "-e", ".", "--no-deps"],
+            _log(["pip", "freeze"], PIP_FROZEN),
         ],
-        file_dep=[STATIC_PKG_JSON, SETUP_PY, SETUP_CFG],
+        file_dep=[SETUP_PY],
         targets=[PIP_FROZEN],
     )
 
@@ -168,6 +177,9 @@ def task_dev():
 
 ## Utilities
 ```py
+def jlpm(args):
+    return CmdAction(["jlpm", *args], cwd=JS, shell=False)
+
 def _log(args, path, **kwargs):
     def _run():
         if not path.parent.exists():

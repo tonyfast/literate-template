@@ -3,12 +3,12 @@
 
 import {
   JupyterFrontEndPlugin,
-  JupyterFrontend,
+  JupyterFrontEnd,
 } from '@jupyterlab/application';
 
 import { PLUGIN_ID } from '.';
 
-function activate(app: JupyterFrontend) {
+function activate(app: JupyterFrontEnd) {
   console.warn(`🚀 ${PLUGIN_ID} is active`, app);
 }
 

@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "jlpm build:ts && jlpm build:ext",
-    "build:ts": "tsc",
+    "build:ts": "tsc -b",
     "build:ext": "jupyter labextension build .",
     "watch": "tsc -w",
     "lint": "jlpm prettier:format",
