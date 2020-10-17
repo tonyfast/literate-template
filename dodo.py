@@ -21,12 +21,13 @@ PROJ = HERE / "untitled"
 PROJ_PROJ = PROJ / "pyproject.toml"
 BUILD = HERE / "build"
 BUILD.exists() or BUILD.mkdir()
-PIP_FROZEN = BUILD / "pip-freeze.log"
-ENV_OK = BUILD / "env.ok"
 
 CC_USE_MAMBA = bool(json.loads(os.environ.get("CC_USE_MAMBA", "false")))
 
 ENV_YML = PROJ / "binder" / "environment.yml"
+ENV_TXT = PROJ / "requirements-dev.txt"
+PIP_FROZEN = BUILD / "pip-freeze.log"
+ENV_OK = BUILD / "env.ok"
 
 
 def task_test():
@@ -73,9 +74,10 @@ def task_test():
                         "pip",
                         "install",
                         "-r",
-                        "requirements-dev.txt",
+                        ENV_TXT,
                     ],
                     shell=False,
+                    cwd=PROJ,
                 ),
                 lambda: ENV_OK.touch(),
             ],
