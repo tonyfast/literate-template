@@ -1,0 +1,28 @@
+name: test
+
+on:
+  pull_request:
+    branches:
+      - "*"
+
+env:
+  PYTHONUNBUFFERED: 1
+  PYTHONIOENCODING: utf-8
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: goanpeca/setup-miniconda@v1.7.0
+        with:
+          environment-file: binder/environment.yml
+      - run: doit -n4 || doit
